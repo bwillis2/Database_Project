@@ -1,0 +1,30 @@
+A possible way to get as many fortunes as possible is to bash it to run and append to a text file, use the arguments to make sure what database I am getting them from(offensive etc)
+
+Common options they give
+	-a all databases
+	-e make the probability of choosing fortune file equal to that of all other files
+	-f print out a list of all fortune files that would have been searched, but do not print a fortune.
+	-i when used with -m, make regular expression searching case-insensitive
+	-l use only quotation longer thhan the length specified with -n, or 160 characters if -n is not used
+
+Search the following the fortune databases to grab from, either that or write bash for local games/fortunes/ and to pull from it a million times and then reduced the size of the file by means of another script to look for duplicates, and of course delete the duplicates:
+	freshmeat.net/browse/895/?topic_id=895	//BAD DON'T USE 404
+	Google: Download fortunes database
+	https://github.com/bmc/fortunes/		//HAS APPROX 2600 FORTUNES THUS FAR
+
+I did not think that I would need the aditions above, instead there were more options that I downloaded from the linux Ubunutu libraries including the offensive files. 
+	
+I have created three files thus far for the base tables: QA.txt, Quote.txt, and Fortune.txt. A small program has been created to parse the fortunes into a form inwhich I can insert them easier into a mysql database. I have also seperated the bofh-exuses (bastard operator from hell excuses), because I plan to make these chosen when a user gives a bad query. So far it is parsing and filling out all of the files, but I did need to translate the offensive fortune files (rot 13 cipher). After translating them I just saved them in a nonParsed file that is included in Fortunes file. This way all of the files will be parsed at the same time, and I can the easily insert them into mysql. 
+
+The parsing was a success and all of the fortunes have been divided into the three files, not including the bofh error messages. The next step is going to be writing a python script to insert all of these into the database.
+
+I just realized that I am also going to have to set-up a loginning in system to where normal users can access the database from the web application, but I can have the application side/server attempt to create a new user with only select abilities after thurough sanitation of user's input. It shouldn't be too bad, I just have to alter my thinking on the python web application code. * My reference mysql database files stored in //var/lib/mysql (will need to be root to access this)
+
+The only way that that I can really find the length that I needed to declare to fit all of the quotes into the tables. The same can be said for the rest of the fortunes. The following marks are the longest quotes char count for each
+Quotes: 2069	Quotee: 702
+QuestionsAndAnswers: 	Questions: 	Answers: 
+Fortunes: 
+
+As it tuns out it is rather difficult to insert quotes into a mysql database as I have painfully found out. However I will find a way to make it work still. The problem is with so many special characters either being interpreted by either mysql or python like " or '.
+
+

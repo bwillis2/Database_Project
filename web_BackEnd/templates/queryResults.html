@@ -1,0 +1,19 @@
+{% extends "query.html" %}
+{% block body %}
+  {% if result %}
+  <div class="row padded"></div>
+  <span class="col-sm-1"></span>
+  <div class="jumbotron bordered col-sm-10">
+    <h3 style="text-align: center;">Your Query's Results</h3>
+    <table class="table table-bordered">
+      {% for row in result %}
+        <tr>
+          {% for item in row %}
+		    <td>{{ item }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+{% endblock %}

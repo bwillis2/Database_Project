@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <metacharset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Frotune Database Interface">
+    <meta name="author" content="Berkeley Willis">
+    <title>Querying</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+      html, body
+      {
+        min-height: 100%;
+        max-width: 100%;
+      }
+      div.bordered
+      {
+        border-radius: 5px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+      }
+      div.padded
+      {
+        padding-top: 10px;
+        padding-bottom: 5px;
+      }
+      .table
+      {
+        border: 0.5px solid #000000;
+        max-width: 100%;
+        table-layout: fixed;
+      }
+      .table-bordered > thead > tr > th,
+      .table-bordered > tbody > tr > th,
+      .table-bordered > tfoot > tr > th,
+      .table-bordered > thead > tr > td,
+      .table-bordered > tbody > tr > td,
+      .table-bordered > tfoot > tr > td 
+      {
+        border: 0.5px solid #000000;
+      }
+    </style>
+  </head>
+  <body> 
+    <nav class"navbar navbar-inverse navbar-fixed-top" style="background-color:#003366;">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="color:#ffffff;">Berkeley's Fortune Finder</a>
+          <ul class="nav nav-pills pull-right" style="right: 0">
+            <li role="presentation"><a href="/" style="color:#ffffff;">Home</a></li>
+            <li role="presentation"><a href="{{ url_for("profile", userName=userName) }}" style="color:#ffffff;">PastQueries</a></li>
+            <li><a href="{{url_for("logout",userName=userName)}}" style="color:#ffffff;">Logout {{userName}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </body>
+  <body>
+    <div class="row padded" ></div>
+    <div class="jumbotron bordered col-sm-10 col-sm-offset-1">
+      <div class="row">
+        <h2 style="text-align: center;">Information on the Tables and their Fields</h2>
+      </div>
+      <div class="row">
+      <table class="col-sm-2 table-bordered col-sm-offset-1">
+            <tr><th>Table Name</th></tr>
+            <tr><td>Field Name</td></tr>
+            <tr><td>Field Name</td></tr>
+            <tr><td>Field Name</td></tr>
+            <tr><td>Field Name</td></tr>
+            <tr><td>Field Name</td></tr>
+        </table>
+        <table class="col-sm-1 table-bordered">
+            <tr><th>Fortunes</th></tr>
+            <tr><td>F_ID</td></tr>
+            <tr><td>Fortune</td></tr>
+        </table>
+        <table class="col-sm-2 table-bordered">
+            <tr><th>Quotes</th></tr>
+            <tr><td>Q_ID</td></tr>
+            <tr><td>Quote</td></tr>
+            <tr><td>Quotee</td></tr>
+        </table>
+        <table class="col-sm-2 table-bordered">
+            <tr><th>Questions_And_Answers</th></tr>
+            <tr><td>QA_ID</td></tr>
+            <tr><td>Subject</td></tr>
+            <tr><td>Question_And_Answer</td></tr>
+            <tr><td>Questions</td></tr>
+            <tr><td>Answers</td></tr>
+        </table>
+        <table class="col-sm-1 table-bordered">
+            <tr><th> *_Q</th></tr>
+            <tr><td>Q_ID</td></tr>
+        </table>
+        <table class="col-sm-1 table-bordered">
+            <tr><th> *_F</th></tr>
+            <tr><td>F_ID</td></tr>
+        </table>
+        <table class="col-sm-1 table-bordered">
+            <tr><th> *_QA</th></tr>
+            <tr><td>QA_ID</td></tr>
+        </table>
+      </div>
+      {% if pastQueries %}
+        <div class="row padded">
+        <h4> Your past queries are: </h4>
+          {% for query in pastQueries %}
+            <div class="row">
+              <h5 class="col-sm-offset-1" style="right: 10%;">{{ query }}</h5>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="form-group" style="">
+        <form method="post" action="{{ url_for("userQuery",userName=userName)}}">
+        <h2 style="text-align: center;">Please Input Your Query Below</h2>
+          <div class="row"><label>Query: </label></div>
+          <div class="row">
+            <textarea class="col-sm-12" name="usrQuery" id="usrQuery">{{lastQuery}}</textarea>
+          </div>          
+          <div class="row padded">
+            <span class="col-sm-5"></span>
+            <button class="btn btn-success col-sm-2" type="submit">Submit Query</button>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <small style="font-size: 70%; float: right;">* The astrix symbols takes palce of any prefix for key mapping tables, full name tables are views and only print one entry </small>
+      </div>
+    </div>
+      <!-- Section that show results if there are any -->
+      {% block body %}{% endblock %}
+  </body>
+</html>

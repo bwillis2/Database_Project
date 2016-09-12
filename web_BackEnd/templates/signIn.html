@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <metacharset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Frotune Database Interface">
+    <meta name="author" content="Berkeley Willis">
+    <title>Sign In</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+      html, body
+      {
+        min-height: 100%
+      }
+      div.bordered
+      {
+        border-radius: 5px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        border-style: solid;
+        border-width: 2px 2px 2px 2px;
+      }
+      div.padded
+      {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body> 
+    <nav class"navbar navbar-inverse navbar-fixed-top" style="background-color:#003366;">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="color:#ffffff;">Berkeley's Fortune Finder</a>
+          <ul class="nav nav-pills pull-right" style="right: 0">
+            <li role="presentation"><a href="/" style="color:#ffffff;">Home</a></li>
+            <li><a href="#" style="color:#ffffff;">Sign In</a></li>
+            <li><a href="/signUp" style="color:#ffffff;"> Sign Up</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </body>
+  <body>
+    <div class="row padded" ></div>
+    <span class="col-sm-3"></span>
+    <div class="jumbotron bordered col-sm-6">
+      <div class="form-group" style="">
+        <form id="SignIn" method="post" action="{{ url_for("signIn")}}">
+        <h2 style="text-align: center;">Welcome back User</h2>
+          <div class="row padded" style="text-align: center;">
+            <span class="col-sm-3"></span>
+             <label class="control-label col-sm-3">User Name: </label>
+            <input type="name" maxlength="20" class="col-sm-3" name="usrAlias" id="usrAlias" placeholder="jdoe123">
+          </div>
+          <div class="row padded" style="text-align: center;">
+            <span class="col-sm-3"></span>
+            <label class="control-label col-sm-3">Password: </label>
+            <input type="password" maxlength="14"class="col-sm-3" name="usrPass" id="usrPass" placeholder="*********">
+          </div>
+          <div class="row padded">
+            <span class="col-sm-5"></span>
+            <button class="btn btn-success col-sm-2" type="submit">Sign In</button>
+          </div>
+          {% if error %}<small style="color: red; font-size: xx-small;">*{{error}}</small>{% endif %}
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
